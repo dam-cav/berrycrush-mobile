@@ -1,0 +1,43 @@
+.grid {
+    width: auto;
+    border-width: 2;
+    border-color: white;
+    border-radius: 5;
+}
+
+.critic{
+    animation-name: explode;
+    animation-duration: 0.4;
+    z-index: 3;
+}
+
+@keyframes explode {
+    60% {
+		transform: scale(1.3);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(0.5);
+		opacity: 0;
+	}
+}
+
+.highlight{
+    border-color: red;
+    border-width: 5;
+    animation-name: shine;
+    animation-duration: 2;
+    animation-iteration-count: infinite;
+}
+
+@keyframes shine {
+    1%{
+        opacity: 0.4;
+    }
+    60% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0.4;
+	}
+}

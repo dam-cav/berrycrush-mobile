@@ -1,0 +1,84 @@
+.levels {
+	/* padding, invece che margin, permette di creare effetto mostri che fuoriescono */
+	padding: var(--margin);
+	padding-top: 0;
+	overflow-y: scroll;
+}
+
+.levels-title {
+	color: var(--primary);
+	font-size: var(--h2);
+	font-weight: bold;
+	text-shadow: 0 -1px 8px #ffffff;
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: var(--margin);
+}
+
+.levels > .level + .level {
+	margin-top: var(--margin-intra);
+}
+
+.level {
+	text-align: unset;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-gap: var(--margin-intra);
+	align-items: center;
+
+	padding: var(--margin-intra);
+	font-size: var(--h4);
+}
+
+/* Icons */
+.level-info svg,
+.level-info img {
+	width: 0.9em;
+	margin-right: var(--margin-intra);
+	/* Allinea le icone con il testo */
+	vertical-align: middle;
+}
+
+/* fix stella troppo grande rispetto alle altre icone */
+.level-difficulty img {
+	width: 0.75em;
+}
+
+.level-thumb {
+	width: 4.5rem;
+	height: 4.5rem;
+	/* transform: scale(1.3); */
+}
+
+.level-monster-name {
+	text-transform: capitalize;
+}
+
+.level-state-container {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	grid-gap: var(--margin-intra);
+
+	justify-content: space-between;
+	/* per spostare NEW e da sbloccare in basso, nella colonna a dx */
+	align-items: flex-end;
+}
+
+/* Ritocchi alle immagini */
+
+.level-thumb img {
+	transform: rotateY(180deg);
+}
+
+.level.is-locked {
+	filter: grayscale(1);
+}
+
+.level.is-played {
+	background: var(--secondary);
+	border-color: var(--secondary-border);
+}
+
+.level.is-locked .level-thumb img {
+	filter: brightness(0%) invert(15%);
+}

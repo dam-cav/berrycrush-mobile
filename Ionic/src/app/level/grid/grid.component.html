@@ -1,0 +1,22 @@
+<table
+  class="grid"
+  (mousedown)="onSwipeStart($event)"
+  (touchstart)="onSwipeStart($event)"
+  (mouseup)="onSwipeEnd($event)"
+  (touchend)="onSwipeEnd($event)"
+>
+  <tr class="row" *ngFor="let row of grid | gridBerryRows; index as y">
+    <td
+      *ngFor="let berry of row; index as x"
+      class="berry-container"
+      (mousedown)="selectBerry(x, y)"
+      (touchstart)="selectBerry(x, y)"
+      [style.background-color]="berry.getColor()"
+      [class.is-selected]="isBerrySelected(x, y)">
+      <img
+        class="berry"
+        [class.is-destroyed]="isBerryDestroyed(x, y)"
+        src="../assets/img/{{berry.getName()}}_berry.png" />
+    </td>
+  </tr>
+</table>

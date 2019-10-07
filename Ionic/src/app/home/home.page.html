@@ -1,0 +1,22 @@
+<div class="page">
+  <div class="menubar-container">
+    <app-menubar></app-menubar>
+  </div>
+  <div class="container centered">
+    <div class="title">
+      <img src="../assets/img/logo.png" />
+    </div>
+    <a class="button is-big play" routerLink="/level-selection">
+      Gioca <img class="icon" src="../assets/img/icons/play.svg">
+    </a>
+    <a
+      class="button is-secondary is-hidden"
+      [class.is-visible]="canReplayTutorial()"
+      routerLink="/level/tutorial">
+      Rigioca tutorial <img class="icon" src="../assets/img/icons/retry.svg">
+    </a>
+  </div>
+  <div class="credits">
+    Progetto Mobile 2019 D.F.T. &#x2012; v1.0.0
+  </div>
+</div>

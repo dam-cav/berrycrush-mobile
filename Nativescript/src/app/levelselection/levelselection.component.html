@@ -1,0 +1,42 @@
+<ActionBar title="" class="action-bar"></ActionBar>
+<FlexboxLayout flexDirection="column" class="terrain"> 
+    <GridLayout columns="auto, *, auto" rows="auto" class="actions" *ngIf="isTutorialPlayed()">
+        <StackLayout col="0" class="markedbtn" (tap)="exit()">
+            <Label text="E" class="svg action-ico"></Label>
+        </StackLayout>
+        <StackLayout col="2" class="markedbtn" (tap)="toggleAudio()">
+            <Label text="C" class="svg action-ico" *ngIf="isAudioEnabled()"></Label>
+            <Label text="B" class="svg action-ico" *ngIf="!isAudioEnabled()"></Label>
+        </StackLayout>
+    </GridLayout>
+    <Label text="Selezione Livello" class="title bold" *ngIf="isTutorialPlayed()"></Label>
+    <ListView class="list-group" [items]="levels">
+        <ng-template let-level="item">
+            <FlexboxLayout flexDirection="row">
+                <GridLayout (Tap)="openLevel($event, level.level, level.locked)" rows="*" columns="*, 3*" class="levelbox markedbtn" [class.lockedbtn]="level.locked" [class.stockbtn]="level.completed">
+                    <Image backgroundColor="transparent" src="{{ level.locked ? 'res://monster_unknown' : 'res://monster_' + level.mname }}" stretch="aspectFit" row="0" col="0"></Image>
+                    <GridLayout row="0" col="1" columns="*, 5*, *, 4*" rows="auto, auto, auto" class="leveldesc">
+                        <Label [text]="level.title" col="0" row="0" colSpan="4" class="bold"></Label>
+
+                        <Label text="G" class="svg icon" col="0" row="1"></Label>
+                        <Label text= "{{ level.locked ? '???' : level.mname | titlecase  }}" col="1" row="1"></Label>
+
+                        <StackLayout col="0" row="2" colSpan="2" orientation="horizontal">
+                            <Label text="J" class="svg" col="0" row="2" *ngFor="let dummy of ' '.repeat(level.difficulty).split(''), let x = index" style="width: 30;"></Label>
+                        </StackLayout>
+
+                        <Label text="I" class="svg icon" col="2" row="1" *ngIf="level.completed"></Label>
+                        <Label [text]="level.bestMoves" col="3" row="1" *ngIf="level.completed"></Label>
+
+                        <Label text="D" class="svg icon" col="2" row="2" *ngIf="level.completed"></Label>
+                        <Label text="{{level.bestTime | date: 'mm:ss'}}" col="3" row="2" *ngIf="level.completed"></Label>
+
+                        <Label text="F" class="svg icon" col="2" row="2" *ngIf="level.locked"></Label>
+                        <Label text="Bloccato" col="3" row="2" *ngIf="level.locked"></Label>
+                    </GridLayout>                                  
+                    <router-outlet [name]="level.level"></router-outlet>
+                </GridLayout>
+            </FlexboxLayout>
+        </ng-template>
+    </ListView>
+</FlexboxLayout>

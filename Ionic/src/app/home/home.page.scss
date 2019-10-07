@@ -1,0 +1,31 @@
+.container {
+	display: flex;
+	flex-flow: column;
+	flex-grow: 1;
+	
+	margin: var(--margin);
+}
+
+.container > * + * {
+	margin-top: var(--margin);
+}
+
+.title {
+	max-width: 20em;
+	min-height: 200px;
+}
+
+.credits {
+	text-align: center;
+	margin: var(--margin);
+	margin-bottom: calc(var(--margin) * 2);
+}
+
+.button.play {
+	min-width: 3.8em;
+	font-size: var(--h2);
+
+	.icon {
+		margin-right: 0;
+	}
+}

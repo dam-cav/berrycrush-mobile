@@ -1,0 +1,43 @@
+.title {
+    height: 12%;
+    color: #d2691e;
+    text-align: center;
+    font-size: 55;
+}
+
+.levelbox {
+    margin: 2.5 15;
+    padding: 15 5 10 5;
+    border-radius: 4;
+    border-bottom-width: 3;
+}
+
+.levelbox Image{
+    transform: scaleX(-1);
+}
+
+.levelpreview {
+    background-color: white;
+    margin: auto;
+    vertical-align: center;
+    border-radius: 3;
+}
+
+.leveldesc {
+    width: 100%;
+    text-align: left;
+    font-size: 24;
+    color: white;
+}
+
+.leveldesc > Label {
+    margin-bottom: 5;
+}
+
+.list-group{
+    height: 78%;
+}
+
+.icon{
+    margin-right: 5;
+}

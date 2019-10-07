@@ -1,0 +1,4 @@
+<GridLayout [columns]="columns" [rows]="rows" class="grid" [width]="14.5 * gCol + '%'"  [height]="14.5 * gRow + '%'" [class.highlight]="highlight === 'grid'">
+                <StackLayout *ngFor="let b of berrys; index as i" [col]="getX(i)" [row]="getY(i)" [backgroundColor]="b.getColor()" (pan)="berryMoved($event,getX(i),getY(i))"></StackLayout>
+                <Image *ngFor="let b of berrys; index as i" [col]="getX(i)" [row]="getY(i)" [src]="getImg(b.getName())" stretch="aspectFit" [class]="berryStatus(getX(i),getY(i))"></Image>
+</GridLayout>

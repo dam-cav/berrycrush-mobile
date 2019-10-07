@@ -1,0 +1,90 @@
+<div class="page">
+  <div class="menubar-container" [class.is-highlighted]="highlight === 'scoreboard'">
+    <app-menubar-level
+      [moves]="moves"
+      [time]="time"
+      [monsterName]="monsterName | titlecase"
+      (levelRestarted)="restart()">
+    </app-menubar-level>
+  </div>
+
+  <div class="grid-container centered">
+    <div class="grid" [class.is-highlighted]="highlight === 'grid'">
+      <app-grid
+        [grid]="_grid"
+        [destroyedCoords]="lastDestroyedCoords"
+        (triedMoveBerry)="onTriedMoveBerry($event)">
+      </app-grid>
+    </div>
+  </div>
+
+  <div class="monsterzone">
+    <div [class.is-highlighted]="highlight === 'hungerbar'">
+      <app-progress-bar
+        [progress]="monsterHunger * 100"
+        label="Fame di {{monsterName | titlecase}}">
+      </app-progress-bar>
+    </div>
+    
+    <div class="bottombar">
+      <div class="message is-hidden" [class.is-visible]="message" (click)="nextTutorialStep()">
+        <span>{{message}}</span>
+        <br>
+        <button
+          class="button message-next"
+          *ngIf="tutorialSteps.length">
+          Avanti
+        </button>
+      </div>
+
+      <div class="monster">
+        <img src="../assets/img/monster_{{monsterName}}.png" />
+      </div>
+
+      <button
+        class="powerup button"
+        [class.is-highlighted]="highlight === 'powerup'"
+        *ngIf="readypower"
+        (click)="onTriedPowerup()">
+        <img class="icon" src="../assets/img/icons/star.svg" />
+        <br>
+        {{readypower}}
+      </button>
+    </div>  
+  </div>
+</div>
+
+<div class="modal" [class.is-active]="completed">
+  <div class="modal-content">
+    <div class="menubox">
+      <div class="menubox-title">
+        <img class="victory-star icon" src="../assets/img/icons/star.svg" />
+        <div>
+          Livello
+          <br>
+          Completato
+        </div>
+        <img class="victory-star icon" src="../assets/img/icons/star.svg" />
+      </div>
+      <div class="menubox-stats">
+        <span>
+          Hai sfamato {{monsterName | titlecase}} in:
+        </span>
+        <br>
+        Mosse: {{moves}} <img class="icon" src="../assets/img/icons/slide-move.svg" />
+        <br>
+        Tempo: {{time | date: 'mm:ss'}} <img class="icon" src="../assets/img/icons/chronometer.svg" />
+        <ng-template [ngIf]="isNewRecord">
+          <br>
+          <strong>Nuovo record!</strong>
+        </ng-template>
+      </div>
+      <button class="button" [routerLink]="['/level-selection']">
+        Prosegui
+      </button>
+      <button class="button is-secondary" (click)="restart()">
+        Rigioca livello
+      </button>
+    </div>
+  </div>
+</div>

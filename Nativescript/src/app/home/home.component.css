@@ -1,0 +1,49 @@
+.buttonzone{
+    height: 80%;
+}
+
+.title {
+    color: black;
+    text-align: center;
+    font-size: 20;
+}
+
+.play{
+    padding: 10%;
+    border-bottom-width: 3;
+    border-radius: 4;
+    width: 60%;
+    height: 120;  
+    margin: 4 25%;
+}
+
+.play Label{
+    width: auto;
+    padding-top: 25;
+    color: white;
+    font-size: 50;
+    word-wrap: none;
+    text-align: center;
+    height: 100%;
+}
+
+.tutorial{
+    padding: 20%;
+    border-bottom-width: 3;
+    border-radius: 4;
+    width: 50%;
+    height: 60;
+    margin: 4 30%;
+}
+
+.tutorial Label{
+    width: auto;
+    color: white;
+    font-size: 17;
+    word-wrap: none;
+    text-align: center;
+}
+
+.icon{
+    margin-left: 10;
+}

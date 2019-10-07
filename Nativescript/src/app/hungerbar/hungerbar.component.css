@@ -1,0 +1,40 @@
+.hcontainer{
+    margin-top: 15;
+}
+
+.progressbar {
+    height: 20;;
+    border-width: 2;
+    border-color: darkred;
+    border-radius: 20;
+    background: #ECEFF1;
+}
+
+.progressbar-value {
+    border-radius: 20;
+    background: red;
+}
+
+.htext{
+    color: #282828;
+    text-align: center;
+    font-size: 19; 
+}
+
+.highlight{
+    animation-name: shine;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes shine {
+    1%{
+        opacity: 0.4;
+    }
+    60% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0.4;
+	}
+}

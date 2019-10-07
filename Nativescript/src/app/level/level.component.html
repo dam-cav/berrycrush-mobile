@@ -1,0 +1,129 @@
+<ActionBar title="" class="action-bar"></ActionBar>
+<FlexboxLayout flexDirection="column" class="terrain">
+    <GridLayout columns="9*, * ,auto" rows="auto" class="actions">
+        <GridLayout columns="*, *, *" rows="auto" col="0" row="0" class="score stockbtn" [class.highlight]="highlight === 'scoreboard'">
+            <StackLayout orientation="vertical" col="0">
+                <Label text="I" class="svg"></Label>
+                <Label [text]="moves"></Label>
+            </StackLayout>
+
+            <StackLayout orientation="vertical" col="1">
+                <Label text="D" class="svg"></Label>
+                <Label text="{{ time | date: 'mm:ss'}}"></Label>
+            </StackLayout>
+
+            <StackLayout orientation="vertical" col="2">
+                <Label text="G" class="svg"></Label>
+                <Label text="{{ monsterName | titlecase }}"></Label>
+            </StackLayout>
+        </GridLayout>
+    
+        <StackLayout col="2" row="0" class="markedbtn" (tap)="pause()">
+            <Label text="H" class="svg action-ico"></Label>
+        </StackLayout>
+    </GridLayout>
+    <GridLayout columns="*" rows="2*, 50, *" class="gamezone">
+        <StackLayout orientation="horizontal" row="0" col="0">
+            <StackLayout orientation="vertical" verticalAlignment="center">
+                <ns-grid [destroyedCoords]="lastDestroyedCoords" [berrys]="berrys" [gCol]="gCol" [gRow]="gRow" (triedMoveBerry)="onTriedMoveBerry($event)" [highlight]="highlight"></ns-grid>
+            </StackLayout>
+        </StackLayout>    
+        <ns-hungerbar [actHunger]=monsterHunger*100 [mName]="monsterName" [highlight]="highlight"></ns-hungerbar>        
+        <GridLayout row="2" col="0" columns="3*,2*" rows="2*,*">
+            <AbsoluteLayout col="0" row="0" rowSpan="2">
+                <GridLayout top="0" left="0" columns="*,*" rows="11*,9*" class="comic" (tap)="nextTutorialStep()" *ngIf="message">
+                    <Label col="0" row="0" colSpan="2" [text]="message" textWrap="true"></Label>
+                    <StackLayout col="1" row="1" class="btn markedbtn" *ngIf="tutorialSteps.length">
+                        <Label text="Avanti"></Label>
+                    </StackLayout>
+                </GridLayout>
+                <GridLayout top="90%" left="0" class="power btn markedbtn" [class.highlight]="highlight === 'powerup'" columns="*" rows="*,*" *ngIf="readypower" (tap)="onTriedPowerup()" style="height: 33%; width: 40%;">
+                    <Label text="J" class="svg" row="0" col="0"></Label>
+                    <Label text="{{readypower | titlecase }}" row="1" col="0"></Label>
+                </GridLayout>
+            </AbsoluteLayout>
+            <Image backgroundColor="transparent" src="res://monster_{{monsterName}}" stretch="aspectFit" row="0" col="1" rowSpan="2"></Image>
+        </GridLayout>
+    </GridLayout>
+</FlexboxLayout>
+
+<!--Menu Apribili-->
+<StackLayout [style.zIndex]="998" orientation="horizontal" class="p-layer" visibility="{{levelPaused ? 'visible' : 'collapse'}}">
+        <GridLayout verticalAlignment="center" horizontalAlignment="center" rows="*,*,*,*,*,*" columns="auto" class="pmenu">
+            <Label text="Pausa" row="0" class="mtitle"></Label>
+            <StackLayout row="1" class="markedbtn" (tap)="continue()">
+                <Label text="Riprendi"></Label>
+            </StackLayout>
+            <StackLayout row="2" rows="auto" class="stockbtn" (tap)="toggleAudio()" orientation="vertical">
+                <StackLayout orientation="horizontal" class="audio" horizontalAlignment="center">
+                    <Label text="Audio On/Off" class="escorted"></Label>
+                    <Label text="C" class="svg escort-right" *ngIf="isAudioEnabled()"></Label>
+                    <Label text="B" class="svg escort-right" *ngIf="!isAudioEnabled()"></Label>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout row="3" class="stockbtn">
+                <Label text="Riprova il livello" (tap)="wayToLeave(1)"></Label>
+            </StackLayout>
+            <StackLayout row="4" class="stockbtn" (tap)="wayToLeave(2)" *ngIf="isTutorialPlayed()">
+                <Label text="Abbandona il livello"></Label>
+            </StackLayout>
+            <StackLayout row="5" class="stockbtn" (tap)="wayToLeave(3)">
+                <Label text="Esci dal gioco"></Label>
+            </StackLayout>
+        </GridLayout>
+</StackLayout>
+<StackLayout [style.zIndex]="999" orientation="horizontal" class="p-layer" visibility="{{leaving > 0 ? 'visible' : 'collapse'}}">
+    <GridLayout verticalAlignment="center" horizontalAlignment="center" rows="2*,3*,2*,2*" columns="auto" class="pmenu">
+        <Label text="Sei sicuro?" row="0" class="mtitle"></Label>
+        <Label text="I tuoi progressi andranno persi" row="1" class="longtext" textWrap="true"></Label>
+
+        <StackLayout row="2" class="markedbtn confirm" (tap)="restart(); wayToLeave(0); continue()" *ngIf="leaving==1">
+            <Label text="Si, riprova il livello"></Label>
+        </StackLayout>
+        <StackLayout row="2" class="markedbtn confirm" (tap)="toLevelSelection()" *ngIf="leaving==2">
+            <Label text="Si, abbandono il livello"></Label>
+        </StackLayout>
+        <StackLayout row="2" class="markedbtn confirm" (tap)="exit()" *ngIf="leaving==3">
+            <Label text="Si, esci dal gioco"></Label>
+        </StackLayout>
+        <StackLayout row="3" class="stockbtn confirm" (tap)="wayToLeave(0)"> 
+            <Label text="No, continua a giocare"></Label>
+        </StackLayout>
+
+    </GridLayout>
+</StackLayout>
+<StackLayout [style.zIndex]="1000" orientation="horizontal" class="p-layer" *ngIf="completed">
+    <GridLayout verticalAlignment="center" rows="6*,9*,8*" columns="auto" class="pmenu">
+    
+        <GridLayout rows="auto, auto" columns="*, 3*, *" row="0" col="0">
+            <Label text="J" row="1" col="0" class="mtitle svg flashing"></Label>
+            <Label text="Livello Completato!" row="0" col="1" rowSpan="2" textWrap="true" class="mtitle"></Label>
+            <Label text="J" row="1" col="2" class="mtitle svg flashing"></Label>
+        </GridLayout>
+
+        <StackLayout row="1" orientation="vertical">
+            <Label text="Hai sfamato {{ monsterName | titlecase }} in:" row="1" ></Label>
+            <StackLayout row="2" orientation="vertical">
+                <StackLayout orientation="horizontal" horizontalAlignment="center">
+                    <Label text="Mosse: {{ moves }}" class="escorted"></Label>
+                    <Label text="I" class="svg escort-right"></Label>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout row="3" orientation="vertical">
+                <StackLayout orientation="horizontal" horizontalAlignment="center">
+                    <Label text="Tempo: {{ time | date: 'mm:ss'}}" class="escorted"></Label>
+                    <Label text="D" class="svg escort-right"></Label>
+                </StackLayout> 
+            </StackLayout>
+            <Label text="Nuovo Record!" row="4" class="bold" *ngIf="isNewRecord"></Label>
+        </StackLayout>
+        <StackLayout row="2" orientation="vertical">
+                <StackLayout row="5" class="markedbtn" (tap)="toLevelSelection()">
+                    <Label text="Prosegui"></Label>
+                </StackLayout>
+                <StackLayout row="6" class="stockbtn" (tap)="restart(); continue()">
+                    <Label text="Rigioca Livello"></Label>
+                </StackLayout>
+        </StackLayout>
+    </GridLayout>
+</StackLayout>

@@ -1,0 +1,65 @@
+<div class="menubar">
+  <div class="scoreboard">
+    <div>
+      <img src="../assets/img/icons/slide-move.svg" />
+      <div>{{moves}}</div>
+    </div>
+    <div>
+      <img src="../assets/img/icons/chronometer.svg" />
+      <div>{{time | date: 'mm:ss'}}</div>
+    </div>
+    <div>
+      <img src="../assets/img/icons/monster.svg" />
+      <div>{{monsterName}}</div>
+    </div>
+  </div>
+  <div class="menubar-item button">
+    <img src="../assets/img/icons/pause.svg" (click)="pause()" />
+  </div>
+</div>
+
+<div class="modal" [class.is-active]="paused">
+  <div class="modal-content">
+    <div class="menubox">
+      <div class="menubox-title">
+        Pausa
+      </div>
+      <button class="button" (click)="unpause()">
+        Riprendi
+      </button>
+      <button class="button is-secondary" (click)="toggleAudio()">
+        Audio On/Off:&nbsp;
+        <img class="icon" src="../assets/img/icons/audion.svg" *ngIf="isAudioEnabled()" />
+        <img class="icon" src="../assets/img/icons/audioff.svg" *ngIf="!isAudioEnabled()" />
+      </button>
+      <button class="button is-secondary" (click)="restartLevel()">
+        Riprova il livello
+      </button>
+      <button class="button is-secondary" (click)="quitLevel()" *ngIf="canQuitLevel()">
+        Abbandona il livello
+      </button>
+      <button class="button is-secondary" (click)="quit()">
+        Esci dal gioco
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" [class.is-active]="paused && showConfirmation">
+  <div class="modal-content">
+    <div class="menubox">
+      <div class="menubox-title">
+        Sei sicuro?
+      </div>
+      <div class="menubox-descr">
+        I tuoi progressi andranno persi.
+      </div>
+      <button class="button" (click)="confirmAction()">
+        Si, {{confirmMessage}}
+      </button>
+      <button class="button is-secondary" (click)="rejectAction()">
+        No, continua a giocare
+      </button>
+    </div>
+  </div>
+</div>

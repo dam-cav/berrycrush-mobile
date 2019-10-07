@@ -1,0 +1,31 @@
+.progress-outer {
+	width: 100%;
+	background-color: seashell;
+	border: 2px solid darkred;
+	font-size: 0.9em;
+
+	border-radius: 25px;
+	overflow: hidden;
+	
+	position: relative;
+}
+
+.progress-inner {
+	min-height: 1em;
+	border-radius: 25px;
+	background-color: red;
+
+	transition: all 0.3s ease-out;
+}
+
+.progress-label {
+	text-align: center;
+	
+	top: 0;
+	position: absolute;
+	width: 100%;
+}
+
+.progress-outer + .progress-label {
+	margin-top: var(--margin-intra);
+}

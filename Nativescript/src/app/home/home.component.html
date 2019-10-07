@@ -1,0 +1,31 @@
+<ActionBar title="" class="action-bar"></ActionBar>
+<FlexboxLayout flexDirection="column" class="terrain">
+    <GridLayout columns="auto, *, auto" rows="auto" class="actions">
+        <StackLayout col="0" class="markedbtn" (tap)="exit()">
+            <Label text="E" class="svg action-ico"></Label>
+        </StackLayout>
+        <StackLayout col="2" class="markedbtn" (tap)="toggleAudio()">
+            <Label text="C" class="svg action-ico" *ngIf="isAudioEnabled()"></Label>
+            <Label text="B" class="svg action-ico" *ngIf="!isAudioEnabled()"></Label>
+        </StackLayout>
+    </GridLayout>
+    <GridLayout columns="*" rows="*, *, 25" class="buttonzone">
+            <Image backgroundColor="transparent" src="res://logo" stretch="aspectFit" row="0" col="0"></Image>
+            <StackLayout orientation="vertical"  row="1">
+                <StackLayout orientation="vertical" (tap)="play($event)" class="play markedbtn">  
+                    <StackLayout orientation="horizontal" horizontalAlignment="center">
+                        <Label text="Gioca"></Label>
+                        <Label text="K" class="svg icon"></Label>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout orientation="vertical" class="tutorial stockbtn" (tap)="openTutorial()" *ngIf="canReplayTutorial()">
+                    <StackLayout orientation="horizontal" horizontalAlignment="center">
+                    <Label text="Rigioca tutorial" verticalAlignment="center"></Label>
+                        <Label text="L" class="svg icon"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            <Label text="Progetto Mobile 2019 D.F.T." class="title" col="0" row="2"></Label>
+    </GridLayout>
+</FlexboxLayout>

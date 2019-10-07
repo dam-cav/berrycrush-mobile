@@ -1,0 +1,48 @@
+<div class="page">
+  <div class="menubar-container">
+    <app-menubar></app-menubar>
+  </div>
+  <h1 class="levels-title">Selezione Livelli</h1>
+  <div class="levels">
+    <div class="level button"
+      *ngFor="let level of levels"
+      [class.is-locked]="level.locked"
+      [class.is-played]="level.completed"
+      (click)="goToLevel(level.level, level.locked)">
+      <div class="level-col level-thumb">
+        <img src="../assets/img/monster_{{level.locked ? 'unknown' : level.mname}}.png" />
+      </div>
+      <div class="level-col level-info">
+        <div class="level-title">
+          <strong>{{level.title}}</strong>
+        </div>
+        <div class="level-state-container">
+          <div>
+            <div class="level-monster">
+              <img src="../assets/img/icons/monster.svg" />
+              <span class="level-monster-name">{{level.locked ? '???' : level.mname}}</span>
+            </div>
+            <div class="level-difficulty">
+              <img
+                *ngFor="let i of range(level.difficulty)"
+                src="../assets/img/icons/star.svg" />
+            </div>
+          </div>
+          <div class="level-state">
+            <ng-template [ngIf]="level.completed">
+              <img src="../assets/img/icons/slide-move.svg" />
+              {{level.bestMoves}}
+              <br />
+              <img src="../assets/img/icons/chronometer.svg" />
+              {{level.bestTime | date: 'mm:ss'}}
+            </ng-template>
+            <ng-template [ngIf]="level.locked">
+              Bloccato
+              <img class="icon" src="../assets/img/icons/lock.svg" />
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

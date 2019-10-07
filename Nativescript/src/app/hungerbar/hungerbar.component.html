@@ -1,0 +1,6 @@
+<GridLayout columns="*" rows="20" row="1" col="0" class="hcontainer" width="auto" [class.highlight]="highlight === 'hungerbar'">
+    <GridLayout col="0" row="0" [columns]="setProgressbarWidth()" class="progressbar">
+        <StackLayout col="0" class="progressbar-value"></StackLayout>
+    </GridLayout>
+    <Label text=" Fame di {{ mName | titlecase }}" row="0" col="0" class="htext"></Label>
+</GridLayout>

@@ -1,0 +1,90 @@
+/*
+In NativeScript, the app.css file is where you place CSS rules that
+you would like to apply to your entire application. Check out
+http://docs.nativescript.org/ui/styling for a full list of the CSS
+selectors and properties you can use to style UI components.
+
+/*
+In many cases you may want to use the NativeScript core theme instead
+of writing your own CSS rules. For a full list of class names in the theme
+refer to http://docs.nativescript.org/ui/theme.
+*/
+@import '~nativescript-theme-core/css/core.light.css';
+
+* {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+Label {
+    font-family: "Doctor Soos Light", "DoctorSoosLight";
+}
+
+.bold {
+    font-family: "Doctor Soos Bold", "DoctorSoosBold";
+}
+
+ActionBar {
+    height: 0;
+    display: none;
+}
+
+/* Icone caricate da font */
+.svg{
+    font-family: "svgfont";
+    text-align: center;
+}
+
+.terrain {
+    background-image: url("res://background");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}
+
+.actions {
+    margin: 0 5% 0 5%;
+    height: 10%;
+    min-height: 70;
+}
+
+.action-ico{
+    font-size: 30
+}
+
+.actions > StackLayout {
+    color: white;
+    border-bottom-width: 3;
+    width: 16.7%;
+    height: 95%;
+    border-radius: 0 0 4 4;
+    word-wrap: none;
+    padding-top: 12;
+}
+
+.btn{
+    color: white;
+    border-bottom-width: 3;
+    border-radius: 4;
+}
+
+.btn > Label{
+    text-align: center;
+}
+
+.markedbtn {
+    background-color:#d2691e;
+    border-color: #734b2e;
+}
+
+.stockbtn {
+    background-color: #e29821;
+    border-color: #a1710e;
+}
+
+.lockedbtn {
+    background-color: #9f9f9f;
+    border-color: #747474;
+}

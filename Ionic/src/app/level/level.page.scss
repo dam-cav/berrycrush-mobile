@@ -1,0 +1,101 @@
+@keyframes pulseHighlight {
+	0%, 100% {
+		// box-shadow: 0 0 4px red;
+		border-color: red;
+		opacity: 1;
+	}
+	60% {
+		// box-shadow: 0 0 10px 3px red;
+		// border-color: white;
+		opacity: 0.7;
+	}
+}
+
+@keyframes pulseWin {
+	0%, 100% {
+		transform: scale(0.8);
+	}
+	60% {
+		transform: scale(1.1);
+	}
+}
+
+.grid-container {
+	margin: 0 var(--margin-intra);
+	flex-shrink: 0;
+	flex-grow: 1;
+
+	.grid {
+		border: 2px solid white;
+		border-radius: 4px;
+		box-shadow: 0 0 4px rgba(0, 0, 0, 0.4), inset 0 0 4px rgba(0, 0, 0, 0.3);
+	}
+}
+
+.monsterzone {
+	text-align: center;
+	margin: var(--margin);
+	display: flex;
+	flex-flow: column;
+
+	.bottombar {
+		margin-top: var(--margin);
+		display: block;
+		position: relative;
+		flex-grow: 1;
+	}
+
+	.powerup {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		// font-size: 1em;
+		text-transform: capitalize;
+	}
+
+	.message {
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		width: 55%;
+
+		background-color: seashell;
+		color: var(--text);
+		font-size: 0.9em;
+		padding: 0.2rem;
+		border: 3px solid var(--text);
+		border-radius: 15px;
+	}
+
+	.message-next {
+		float: right;
+		padding: 0.4rem 1.1rem;
+	}
+
+	.monster {
+		width: 24vh;
+		margin: 0 0 0 auto;
+
+		/* Per sovrapporlo a .message */
+		position: relative;
+	}
+}
+
+.menubox-stats {
+	text-align: center;
+	font-size: var(--h4);
+	margin: var(--margin) 0;
+
+	white-space: nowrap;
+	text-overflow: clip;
+}
+
+.victory-star {
+	animation: pulseWin 1s infinite;
+}
+
+.is-highlighted {
+	border: 3px solid red;
+	animation: 2s pulseHighlight infinite;
+}

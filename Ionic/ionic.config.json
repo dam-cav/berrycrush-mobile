@@ -1,0 +1,7 @@
+{
+  "name": "BerryCrush",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

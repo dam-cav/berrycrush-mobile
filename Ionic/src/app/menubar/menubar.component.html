@@ -1,0 +1,10 @@
+<div class="menubar">
+  <div class="menubar-item button" (click)="quit()">
+    <img src="../assets/img/icons/exit.svg" />
+  </div>
+  
+  <div class="menubar-item button" (click)="toggleAudio()">
+    <img src="../assets/img/icons/audion.svg" *ngIf="isAudioEnabled()" />
+    <img src="../assets/img/icons/audioff.svg" *ngIf="!isAudioEnabled()" />
+  </div>
+</div>

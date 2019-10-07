@@ -1,0 +1,63 @@
+@keyframes berryDestroy {
+	60% {
+		transform: scale(1.2);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(0.0);
+		opacity: 0;
+		filter: brightness(1.7);
+	}
+}
+
+@keyframes inflate {
+	0% { transform: scale(1, 1); }
+    65% { transform: scale(1.2, 1.2); }
+    100% { transform: scale(0, 0); }
+}
+
+.grid {
+	// height settato necessario, così che cell possono avere altezza
+	height: 100%;
+
+	// fixed: rendering più veloce, no ri-calcolo width max per ogni colonna
+	table-layout: fixed;
+
+	// Tarato su grid max di 7x7, supportato da iPhoneX, GalaxyS5, Pixel2
+	--cell-height: 7.4vh;
+	--cell-width: 3.6rem;
+}
+
+.berry-container {
+	// flex si wrappa consistentemente al .berry contenuto
+	height: var(--cell-height);
+	max-height: var(--cell-width);
+	width: var(--cell-width);
+	max-width: var(--cell-height);
+	
+	display: table-cell;
+	text-align: center;
+	
+	.berry {
+		display: inline-block;
+		// Dà la altezza alla cella
+		min-height: 2em;
+		height: var(--cell-height);
+		// Evita stretch delle immagini delle bacche (non sono tutte 1:1)
+		width: auto;
+
+		object-fit: contain;
+		vertical-align: middle;
+
+		// Per animazione &.is-selected img
+		transition: transform 0.10s ease-out;
+
+		&.is-destroyed {
+			animation: inflate 0.3s ease-out forwards;
+		}
+	}
+
+	&.is-selected .berry {
+		transform: scale(0.85);
+	}
+}
