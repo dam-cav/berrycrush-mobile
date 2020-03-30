@@ -9,6 +9,12 @@ I framework scelti sono:
 - **Ionic** per l'approccio ibrido;
 - **NativeScript** per l'approccio Interpretato.
 
+## Contributori
+
+- [dam-cav](https://github.com/dam-cav)
+- [ffiora](https://github.com/ffiora)
+- [tomsotte](https://github.com/tomsotte)
+
 ## Screen Applicazione
 
 ### Home
